@@ -9,9 +9,9 @@ W ramach zadania dostępne będą 3 pliki csv.
 
 Pierwszy – **znaki-sekwencje-20160604.csv** zawiera informacje o znakach znajdujących się w danej sekwencji. Poprzez sekwencję rozumiany jest ciąg kojelnych znaków (następy znak to następny wiersz), który jest cykliczny, czyli tam, gdzie się kończy sekwencja, to jest też miejsce, gdzie się zaczyna. Jest tak, ponieważ znaki są naokoło całego kubka. Założenie tutaj jest takie, że znaki czytamy od lewej do prawej strony. Każdy znak ma swój kod. Zaczyna się on od wielkiej litery określającej ogólny rodzaj znaku. Następnie oddzielone kropkami są liczy, oznaczające elementy odzobne znajdujące się na zanku. Jeśli jest ich więcej, to są oddzielone kropkami. Aby zrozumieć sposób kodowania, proszę spojrzeć w folder znaki. Grafiki tam się znajdujące powinny wyjaśnić sposób kodowania tokapu. Czasem znajdują się dwie litery z kodzie znaku, np. B.27.23.B.30. Oznacza to, że tokapu składa się z dwóch części charakterystycznych dla znaku typu B. Jest też specjalne oznaczenie „0” jako znaku uszkodzonego.
 
-Drugi plik – **obiekty-sekwencje-20160604.csv** zawiera informacje dotyczące obiektu i skojarzonego z nim sekwencjami. Większość obiektów ma jedną sekwencję. Zdarza się jednak, że dany kubek ma górną i dolna sekwencję. Wtedy przykładowo dla obiektu COLA28 górna sekwencja jest oznaczona jako COLA28sup, a dolna jako COLA28inf. Dodatkowo jest infoamcja o liczbie sekwencji na obiekcie (l.sekwencji), liczbie znaków w sekwencji (l.znaków) oraz o (nie pamiętam co tutaj oznaczała kolumna cykliczna).
+Drugi plik – **obiekty-sekwencje-20160604.csv** zawiera informacje dotyczące obiektu i skojarzonego z nim sekwencjami. Większość obiektów ma jedną sekwencję. Zdarza się jednak, że dany kubek ma górną i dolna sekwencję. Wtedy przykładowo dla obiektu COLA28 górna sekwencja jest oznaczona jako COLA28sup, a dolna jako COLA28inf. Dodatkowo jest infoamcja o liczbie sekwencji na obiekcie - *l.sekwencji*, liczbie znaków w sekwencji - *l.znaków* oraz o cykliczności sekwencji - *cykliczna*, gdzie "a" oznacza acykliczną sekwencj, a w przeciwnym przypadku mamy cykliczną sekwencję, gdzie piwerszy znak sąsiaduje z drugim i ostatnim w sekwencji.
 
-Trzecie plik – **obiekty-sceny-20160604.csv** zamiera infoamcje o znajdujących się na obiektach scenach. Jest napisane ile znajduje się scen (część kubków w ogólne nie ma) oraz o rodzaju sceny. Każdy rodzaj sceny taki jak polowanie, ślub itp. ma swój własny identyfikator. Potrzeba jakiegoś pliku opisującego, co dany kod sceny oznacza.
+Trzecie plik – **obiekty-sceny-20160604.csv** zamiera infoamcje o znajdujących się na obiektach scenach. Jest napisane ile znajduje się scen (część kubków w ogólne nie ma) oraz o rodzaju sceny. Każdy rodzaj sceny taki jak polowanie, ślub itp. ma swój własny identyfikator.
 
 # Organizacja hackathonu
 W ramach mini-hackathonu są dane dwie propozycje zadania. Różnią się one od siebie, aby każdy mógł spróbować swoich sił niezależnie od poziomu umiejętności, czy preferencji. Jeśli ktoś będzie miał ochotę, to może wykonać dwa zadania.
@@ -27,10 +27,22 @@ W tym zadaniu twoim celem będzie dokonanej dogłębnej analizy i klasteryzacji 
 Jest możliwość zdefiniowania samemu problemu do rozwiązania. W takim przypadku prosimy o kontakt do organizatorów bootcampów za pośrednictwem discorda. Pomysł zostanie zweryfikujemy i w przypadku pozytywnego rozpatrzenia, pozwolimy na jego realizację.
 
 ## Uwagi do rozwiązań
-Roz
-
 Znaki tokapu są w pewien sposób zakodowane. Jest to wykonane w sposób pozwalający zachować informacje, jaką ma on strukturę, pozwalający porównywać między innymi podobieństwo znaków. Jeśli jednak uznasz, że w twoim rozwiązaniu lepiej będzie się sprawdzała inna reprezentacja tokapu, to należy umieścić w rozwiązaniu sposób tej zmiany oraz uzasadnienie takiego działania. Instotne jest, aby inna reprezentacja znaku zawierała taką samą ilość informacji co wcześniej, czyli nie zezwalamy na sytuację, gdzy wszystkie znaki typu B będą kodowane jedną literką, bo to zmniejsza ilość informacji w kodowaniu.
 
 
 # Przesyłanie rozwiązań
-Aby przesłać rozwiązanie, należy zrobic pull request na to repozytorium. Folder z rozwiązaniem nazwany 
+Aby przesłać rozwiązanie, należy zrobic pull request na to repozytorium. Folder z rozwiązaniem nazywać się ma tak jak nazwa zespołu. Kod rozwiązania powinien znajdować się w podfolderze **code**. Nie przesyłamy żadnych danych. Kod powinein być napisany schludnie, aby nie było problematyczne jego przeczytanie. Proszę zwrócić uwagę na reprodukowalność rozwiązań, przykładowo poprzez ustawienie ziarna.
+
+Rozwiązanie musi zawierać któtki raport. Ma on zawierać opis rozwiązania, zastosowanych metod, uzyskanych wyników i ewentualne wnioski. Prefrowany format pliku to pdf, ewentualnie notatnik jupyterowy (nie zalecamy).
+
+Optatni wymagany plik to REAMME.md. Jego zadaniem ma być krótki opis plików znajdujących się w folderze *code*, aby nie trzeba było się domyślać, co za co odpowiada.
+
+Podsumowując, dla zespołu o nazwie *Danonki* struktura folderu z rozwiązaniem powinna wyglądać następująco:
+
+**Danonki**
+* code
+    * code_file_1.py
+    * code_file_2.py
+    * code_file_3.py
+* README.md
+* raport.pdf
