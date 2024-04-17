@@ -52,9 +52,9 @@ Podsumowując, dla zespołu o nazwie *Danonki* struktura folderu z rozwiązaniem
 
 **Danonki**
 * code
-* code_file_1.py
-* code_file_2.py
-* code_file_3.py
+  * code_file_1.py
+  * code_file_2.py
+  * code_file_3.py
 * README.md
 * raport.pdf
 
