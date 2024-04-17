@@ -4,7 +4,7 @@
 # Czym będziesz się zajmować
 W ramach mini hackathonu będziesz pracować nad znakami tokapu z Imperium Inków. Jest to rodzaj dekoracyjnego dzieła sztuki z motywami geometrycznymi. Znaki te umieszczane były między na ubraniach ówczesnej elity inkaskiej oraz na kubkach, na których się w tym zadaniu skupimy. Tokapu wykazuje pewne cechy będące charakterystyczne dla języka naturalnego, więc jest założenie, że każde z nich ma konkretne znaczenie. Nie wiadomo jednak, co one oznaczają dokładnie, bowiem nie ma w tym przypadku kamienia z Rosetty, który by umożliwiłby rozwikłanie zagadki. Twoim zadaniem będzie pomóc w przybliżeniu się do prawdy stojącej za tajemniczymi znakami tokapu.
 
-W tym miejscu należą się podziękowania dla prof. M.Ziółkowskiego oraz prof. J.Arabasa, dzięki którym można byc zorganizować to wydarzenie. Bardzo Panom dziękujemy!
+W tym miejscu należą się podziękowania dla prof. Mariusza S. Ziółkowskiego oraz prof. Jarosława Arabasa, dzięki którym można było zorganizować to wydarzenie. Bardzo Panom dziękujemy!
 
 # Organizacja mini-hackathonu
 Zespoły powinny liczyć od 1 do 4 osób. Każdy z nich powinien mieć ustaloną nazwę. Prośba jest o nie tworzenie podobnych, aby uniknąć pomyłek. Oficjalnym kanałem komunikacji jest kanał *bootcamp* na discordzie Golema. Tam proszę zadawać ewentualne pytania. Rozwiązania są przesyłane na tym repozytorium za pomocą pull request. Szczegóły są opisane w sekcji *Przesyłanie rozwiązań*. Ostateczny termin przesyłania rozwiązań jest do **15 maja do godz. 23:59**. Po tym czasie repozytorium stanie się prywatne i nie będzie możliwości wprowadzania zmian.
@@ -28,14 +28,12 @@ Jeśli jest chęć wykonania więcej niż jednego zadania, to jest taka możliwo
 W ramach tego zadania celem będzie stworzenie modelu generującego sekwencje. Wybór modelu jest dowolny, ale zapewniający, że nie nastąpi uczenie na pamięć. Następnie używamy modelu, aby wygenerować sekwencje.
 
 Do dyspozycji będą dostępne trzy zmodyfikowane zbiory:
-* *znaki-sekwencje-20160604-train-analiza1.csv*,
-* *znaki-sekwencje-20160604-train-analiza2.csv*,
-* *znaki-sekwencje-20160604-train-analiza3.csv*.
+* *znaki-sekwencje-20160604-analiza1.csv* - znaki G.<...> są usunięte i zastąpione symbolem N (brak znaku),
+* *znaki-sekwencje-20160604-analiza2.csv* - znaki A.36, A.37, A.38 są usunięte i zastąpione symbolem N,
+* *znaki-sekwencje-20160604-analiza3.csv* - znaki G.<...> są usunięte i zastąpione symbolem G (czy znamy rodzaj znaku, ale nie mamy informacji o jego ozdobnikach).
 
-Dla każdego ze zbiorów należy nauczyć model. Wygenerowane sekwencje należy porównać wygenerowane znaki w pustych miejscach z oryginalnymi znakami.
-Oryginalne sekwencje są dostępne w pliku *znaki-sekwencje-20160604-original.csv*.
-
-Jeśli okaże się to przydatne, to można wykorzystać również dane z plików *obiekty-sekwencje-20160604.csv* oraz *obiekty-sceny-20160604.csv*. Wszystkie dane zostały umieszczone w folderze **dane/zadanie_1**.
+Dla każdego ze zbiorów należy nauczyć model. Należy pamiętać o podziale każdego ze zbiorów *<...>-analiza1.csv*, *<...>-analiza2.csv*, *<...>-analiza3.csv* na zbiór treningowy oraz testowy w proporcjach 80/20. Proszę to zrobić w sposób inteligentny.  Wygenerowane sekwencje należy porównać wygenerowane znaki w pustych miejscach z oryginalnymi znakami.
+Oryginalne sekwencje są dostępne w pliku *znaki-sekwencje-20160604-original.csv*. Wszystkie dane zostały umieszczone w folderze **dane/zadanie_1**.
 
 ## Zadanie 2.
 W tym zadaniu twoim celem będzie dokonanej dogłębnej analizy. Głównym zadaniem będzie uchwycenie schematów, zależności, może powiązanie znaków ze współistniejącymi scenami. Istotne jest, aby wyciągnąć jak najwięcej przydatnych informacji z danych. Ciekawe może tutaj okazać się użycie klasteryzacji, jeśli to możliwe. Zadanie jest otwarte, więc można do niego podchodzić różnorodnie. Poza oryginalnością doceniane będzie dogłędnośći jakość przeprowadzonych analiz. Wszystkie dane potrzebne do tego zadania zostały umieszczone w folderze **dane/zadanie_2**.
