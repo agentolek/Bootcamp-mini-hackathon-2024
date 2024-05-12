@@ -36,6 +36,8 @@ def read_scenes(path):
                 curr_scenes = [row[2]]
                 object_name = row[0]
 
+        dict[object_name] = curr_scenes
+
     return dict
 
 def read_object_seqs(path):
@@ -47,19 +49,15 @@ def read_object_seqs(path):
 
     return data
 
-def main(args):
-    sequence_path = "dane/zadanie_2/znaki-sekwencje-20160604.csv"
+def create_frame():
+    sequence_path = "/home/agentolek/AI/Bootcamp-mini-hackathon-2024/dane/zadanie_2/znaki-sekwencje-20160604.csv"
     sequence_dict = read_seqs(sequence_path)
 
-    scenes_path = "dane/zadanie_2/obiekty-sceny-20160604.csv"
+    scenes_path = "/home/agentolek/AI/Bootcamp-mini-hackathon-2024/dane/zadanie_2/obiekty-sceny-20160604.csv"
     object_scenes = read_scenes(scenes_path)
 
-    object_sequences_path = "dane/zadanie_2/obiekty-sekwencje-20160604.csv"
+    object_sequences_path = "/home/agentolek/AI/Bootcamp-mini-hackathon-2024/dane/zadanie_2/obiekty-sekwencje-20160604.csv"
     object_sequences = read_object_seqs(object_sequences_path)
-
-    print(sequence_dict.get('MIMO-MAC164'))
-    print(object_scenes.get('MIMO-MAC164'))
-    print(object_sequences[-1])
 
     ultimate_data = []
     for elem in object_sequences:
@@ -67,10 +65,10 @@ def main(args):
         list_elem.append(sequence_dict.get(elem[1])) # get by sequence name
         list_elem.append(object_scenes.get(elem[0])) # get by object name
         ultimate_data.append(list_elem)
-
-    print(ultimate_data[0])
+        
     my_frame = pandas.DataFrame(ultimate_data, columns=("object_name", "seq_name", "num_of_sequences", "sequence_len", "cycle", "sequence_values", "scenes"))
-    print(my_frame)
+
+    return my_frame
 
 if __name__ == "__main__":
-    main(sys.argv)
+    create_frame()
