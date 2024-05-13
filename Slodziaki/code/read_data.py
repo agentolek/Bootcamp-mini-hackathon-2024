@@ -14,7 +14,8 @@ def read_seqs(path):
             if prev_row_name == row[0]:
                 current_sequence.append(row[1])
             else:
-                dict[prev_row_name] = current_sequence
+                if prev_row_name != "":
+                    dict[prev_row_name] = current_sequence
                 current_sequence = [row[1]]
                 prev_row_name = row[0]
         dict[prev_row_name] = current_sequence
