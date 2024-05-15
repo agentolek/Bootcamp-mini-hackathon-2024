@@ -54,13 +54,13 @@ def read_object_seqs(path):
 
 
 def create_frame():
-    sequence_path = "/home/zuzaw/mini_hackathon/Bootcamp-mini-hackathon-2024/dane/zadanie_2/znaki-sekwencje-20160604.csv"
+    sequence_path = "/home/agentolek/AI/Bootcamp-mini-hackathon-2024/dane/zadanie_2/znaki-sekwencje-20160604.csv"
     sequence_dict = read_seqs(sequence_path)
 
-    scenes_path = "/home/zuzaw/mini_hackathon/Bootcamp-mini-hackathon-2024/dane/zadanie_2/obiekty-sceny-20160604.csv"
+    scenes_path = "/home/agentolek/AI/Bootcamp-mini-hackathon-2024/dane/zadanie_2/obiekty-sceny-20160604.csv"
     object_scenes = read_scenes(scenes_path)
 
-    object_sequences_path = "/home/zuzaw/mini_hackathon/Bootcamp-mini-hackathon-2024/dane/zadanie_2/obiekty-sekwencje-20160604.csv"
+    object_sequences_path = "/home/agentolek/AI/Bootcamp-mini-hackathon-2024/dane/zadanie_2/obiekty-sekwencje-20160604.csv"
     object_sequences = read_object_seqs(object_sequences_path)
 
     ultimate_data = []
