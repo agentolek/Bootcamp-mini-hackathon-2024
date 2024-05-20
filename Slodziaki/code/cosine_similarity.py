@@ -8,6 +8,7 @@ class Clusterizer:
     sentences = None
     dataframe = None
     threshold_value = 0.4
+    sim_func = None
 
     clusters = []
 
@@ -34,8 +35,12 @@ class Clusterizer:
     
     @staticmethod
     def same_symbols_sum(seq1, seq2):
-        return np.dot(seq1, seq2)
+        # temp = list(zip(seq1, seq2))
+        # return sum([min(x) for x in temp])
 
+        # does the same thing as the above lines
+        return np.dot(seq1, seq2)
+    
 
     def vectorize_all(self, sequences) -> np.array:
         embed = self._create_seq_list()
@@ -45,15 +50,14 @@ class Clusterizer:
         return np.array(vecs)
 
 
-    def cosine_sim_all(self, embeds, sim_func=cosine_sim):
+    def create_sim_matrix(self, embeds):
         # the matrix returned shows, in each row, the similarity of a single sequence to each other sequence
         my_matrix = np.zeros(shape=(len(embeds), len(embeds)))
         for i in range(len(embeds)):
-            for c in range(i + 1, len(embeds)):
-                temp = sim_func(embeds[i], embeds[c])
+            for c in range(i, len(embeds)):
+                temp = self.sim_func(embeds[i], embeds[c])
                 my_matrix[i][c] = temp
                 my_matrix[c][i] = temp
-            my_matrix[i][i] = 1
 
         return my_matrix
     
@@ -68,6 +72,7 @@ class Clusterizer:
         clusters = []
 
         # outdated selection mechanism
+
         # for i in range(len(sim_matrix)):
         #     curr_cluster = []
         #     row = sim_matrix[i]
@@ -77,14 +82,22 @@ class Clusterizer:
         #     clusters.append(tuple(sorted(curr_cluster)))
         unused_rows = list(range(len(sim_matrix)))
 
+        # selects random sequence as being descriptive, creates cluster around it based on threshold value
         while len(unused_rows) != 0:
             curr_cluster = []
-            row = sim_matrix[np.random.choice(unused_rows)]
+            index = np.random.choice(unused_rows)
+            row = sim_matrix[index]
             for v_i in range(len(row)):
                 if row[v_i] >= self.threshold_value and v_i in unused_rows:
                     unused_rows.remove(v_i)
                     curr_cluster.append(v_i)
-            clusters.append(tuple(curr_cluster))          
+            
+            # if current element deosn't create cluster, make it a one-element cluster
+            if len(curr_cluster) == 0:
+                unused_rows.remove(index)
+                curr_cluster.append(index)
+
+            clusters.append(tuple(curr_cluster))
 
         clusters = self._convert_clusters(clusters)
         return clusters
@@ -92,22 +105,28 @@ class Clusterizer:
 
     def _create_heatmap():
         pass
-
+    
 
     def clusterize(self):
         embeddings = self.vectorize_all(self.sentences)
-        sim_matrix = (self.cosine_sim_all(embeddings, self.cosine_sim))
+        sim_matrix = self.create_sim_matrix(embeddings)
+        print(sim_matrix)
         self.clusters = self._create_clusters(sim_matrix)
         print(f"Created {len(self.clusters)} clusters.")
+        return self.clusters
 
 
-    def __init__(self, sentences, frame) -> None:
+    def __init__(self, sentences, frame, func=cosine_sim) -> None:
         self.sentences = sentences
         self.dataframe = frame
+        self.sim_func = func
 
 
 if __name__ == "__main__":
     # create embedding
     df = create_frame()
-    clus = Clusterizer(df["sequence_values"], df)
-    clus.clusterize()
+    clus = Clusterizer(df["sequence_values"][:7], df[:7])
+    print(clus.same_symbols_sum([1, 2, 3], [1, 2, 3]))
+    clus.threshold_value = 2
+    clus.sim_func = clus.same_symbols_sum
+    print(clus.clusterize())
