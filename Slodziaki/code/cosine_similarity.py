@@ -7,7 +7,7 @@ class Clusterizer:
 
     sentences = None
     dataframe = None
-    threshold_value = 1.5
+    threshold_value = 0.4
 
     clusters = []
 
@@ -57,6 +57,38 @@ class Clusterizer:
 
         return my_matrix
     
+    def _convert_clusters(self, cluster_set):
+        new_clusters = []
+        for elem in cluster_set:
+            temp = [self.sentences[i] for i in elem]
+            new_clusters.append(temp)
+        return new_clusters
+
+    def _create_clusters(self, sim_matrix):
+        clusters = []
+
+        # outdated selection mechanism
+        # for i in range(len(sim_matrix)):
+        #     curr_cluster = []
+        #     row = sim_matrix[i]
+        #     for v_i in range(len(row)):
+        #         if row[v_i] >= self.threshold_value:
+        #             curr_cluster.append(v_i)
+        #     clusters.append(tuple(sorted(curr_cluster)))
+        unused_rows = list(range(len(sim_matrix)))
+
+        while len(unused_rows) != 0:
+            curr_cluster = []
+            row = sim_matrix[np.random.choice(unused_rows)]
+            for v_i in range(len(row)):
+                if row[v_i] >= self.threshold_value and v_i in unused_rows:
+                    unused_rows.remove(v_i)
+                    curr_cluster.append(v_i)
+            clusters.append(tuple(curr_cluster))          
+
+        clusters = self._convert_clusters(clusters)
+        return clusters
+
 
     def _create_heatmap():
         pass
@@ -64,8 +96,9 @@ class Clusterizer:
 
     def clusterize(self):
         embeddings = self.vectorize_all(self.sentences)
-        print(self.sentences)
-        sim_matrix = (self.cosine_sim_all(embeddings, self.same_symbols_sum))
+        sim_matrix = (self.cosine_sim_all(embeddings, self.cosine_sim))
+        self.clusters = self._create_clusters(sim_matrix)
+        print(f"Created {len(self.clusters)} clusters.")
 
 
     def __init__(self, sentences, frame) -> None:
@@ -76,5 +109,5 @@ class Clusterizer:
 if __name__ == "__main__":
     # create embedding
     df = create_frame()
-    clus = Clusterizer(df["sequence_values"][:5], df[:5])
+    clus = Clusterizer(df["sequence_values"], df)
     clus.clusterize()
