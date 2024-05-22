@@ -43,6 +43,4 @@ Jeżeli chodzi o sceny, parę z nich także występuje o wiele częściej od inn
 
 2. Część naczyń była przedmiotami indywidualnymi, inne były "masowej" produkcji. Wniosek ten można wyciągnąć z tego, że część naczyń można grupować po 40, inne są kompletnie wyjątkowe. Sceny sugerują podobny wniosek.
 
-3. 
-
-    
+3. Znaki nie opisują scen na naczyniach, na których się znajdują. Można to wywnioskować z faktu, że naczynia z unikatowymi scenami nie zawierają prawie żadnych unikatowych symboli.
