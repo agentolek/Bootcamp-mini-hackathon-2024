@@ -24,7 +24,10 @@ Jedną z najważniejszych rzeczy, które udało nam się za jej pomocą udowodni
 ![alt text](plots/scene_symbol_count.png)\
 *Tylko 8 unikatowych symboli występuje na naczyniach ze scenami które występują 10 lub mniej razy.*
 
+Badaliśmy także to, czy niektóre symbole występują w parach. Udało się znaleźć kilka przypadków takich par.
+
 Poza tym, udało nam się także znaleźć dwa symbole które nie występują ze sobą na tych samych naczyniach - "B.29.23.B.25" oraz "E.17.25."
+
 
 ### 3. Statystyka
 Które elementy występują najczęściej, które najrzadziej, czy ich częstość występowania jest wyrównana - takie fakty pragnęliśmy badać za pomocą tych metod. Już na samym początku zauważyliśmy, że większość symboli występuje tylko parokrotnie, a inne potrafią pojawiać się po kilkadziesiąt razy (np. B.24.11, B.27.30, A.6).
@@ -43,3 +46,5 @@ Jeżeli chodzi o sceny, parę z nich także występuje o wiele częściej od inn
 2. Część naczyń była przedmiotami indywidualnymi, inne były "masowej" produkcji. Wniosek ten można wyciągnąć z tego, że część naczyń można grupować po 40, inne są kompletnie wyjątkowe. Sceny sugerują podobny wniosek.
 
 3. Znaki nie opisują scen na naczyniach, na których się znajdują. Można to wywnioskować z faktu, że naczynia z unikatowymi scenami nie zawierają prawie żadnych unikatowych symboli.
+
+4. Niektóre znaki łączą się ze sobą w pary - być może razem mają inne znaczenie niż osobno, albo jeden z nich opisuje dokładniej drugi.
