@@ -1,6 +1,7 @@
 from read_data import create_frame
 import numpy as np
 from numpy.linalg import norm
+from gensim.models import Word2Vec
 
 
 class Clusterizer:
@@ -9,6 +10,7 @@ class Clusterizer:
     dataframe = None
     threshold_value = 0.4
     sim_func = None
+    model = None
 
     clusters = []
 
@@ -25,14 +27,14 @@ class Clusterizer:
             i = embed.index(symbol)
             ret_vec[i] += 1
         return ret_vec
-    
+
 
     @staticmethod
     def cosine_sim(seq1, seq2):
         # returns values from the <-1, 1> range
         return np.dot(seq1, seq2) / (norm(seq1) * norm(seq2))
-    
-    
+
+
     @staticmethod
     def same_symbols_sum(seq1, seq2):
         # temp = list(zip(seq1, seq2))
@@ -40,15 +42,20 @@ class Clusterizer:
 
         # does the same thing as the above lines
         return np.dot(seq1, seq2)
-    
+
 
     def vectorize_all(self, sequences) -> np.array:
         embed = self._create_seq_list()
         vecs = []
         for seq in sequences:
-            vecs.append(self._vectorize_sequence(seq, embed))
+            # vecs.append(self._vectorize_sequence(seq, embed))
+            vecs.append(self.word_2_vec(seq))
         return np.array(vecs)
 
+
+    def word_2_vec(self, sequence):
+        embedded = [self.model.wv[char] for char in sequence if char in self.model.wv]
+        return sum(embedded) / len(embedded)
 
     def create_sim_matrix(self, embeds):
         # the matrix returned shows, in each row, the similarity of a single sequence to each other sequence
@@ -60,7 +67,7 @@ class Clusterizer:
                 my_matrix[c][i] = temp
 
         return my_matrix
-    
+
     def _convert_clusters(self, cluster_set):
         new_clusters = []
         for elem in cluster_set:
@@ -91,7 +98,7 @@ class Clusterizer:
                 if row[v_i] >= self.threshold_value and v_i in unused_rows:
                     unused_rows.remove(v_i)
                     curr_cluster.append(v_i)
-            
+
             # if current element deosn't create cluster, make it a one-element cluster
             if len(curr_cluster) == 0:
                 unused_rows.remove(index)
@@ -105,12 +112,11 @@ class Clusterizer:
 
     def _create_heatmap():
         pass
-    
+
 
     def clusterize(self):
         embeddings = self.vectorize_all(self.sentences)
         sim_matrix = self.create_sim_matrix(embeddings)
-        print(sim_matrix)
         self.clusters = self._create_clusters(sim_matrix)
         print(f"Created {len(self.clusters)} clusters.")
         return self.clusters
@@ -120,6 +126,8 @@ class Clusterizer:
         self.sentences = sentences
         self.dataframe = frame
         self.sim_func = func
+
+        self.model = Word2Vec(sentences=sentences, min_count=1, window=2, vector_size=128)
 
 
 if __name__ == "__main__":
