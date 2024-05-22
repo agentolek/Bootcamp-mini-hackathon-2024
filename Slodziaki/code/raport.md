@@ -1,20 +1,19 @@
 # Znaki Tokapi - analiza.
 
 ## O czym tu piszemy?
-Naszym zadaniem było poddanie analizie sekwencji znaków tokapi aby wyciągnąc z nich jak najwięcej informacji. 
+Naszym zadaniem było poddanie analizie sekwencji znaków tokapi w celu wyciągnięcia z nich jak największyej ilości informacji. 
 Większość hipotez, które zdecydowaliśmy się sprawdzić okazała się być ślepymi zaułkami, lecz udało nam się odnaleźć parę wartościowych informacji na temat tego zbioru danych.
-Zakładamy tutaj, że symbole te zawierają jakieś głębsze znaczenie - co więcej, że funkcjonują one podobnie do słów i symbole niepodobne do siebie niosą osobne znaczenia.
 
 ## Wykorzystywane metody
-Postanowiliśmy podejść do tego zadania od paru różnych stron, osiągając różne poziomy sukcesu:
+Postanowiliśmy podejść do tego zadania od paru różnych stron:
 
 ### 1. Klasteryzacja
-Wykorzystywaliśmy wiele metod do klasteryzacji, jednak większość z nich okazała się być nieadekwatna do naszych danych. Głównym problemem okazało się bardzo mocne zróżnicowanie danych, niektóre metody też mają narzuconą od góry ilość klusterów które generują. Ustalenie tej liczby okazało się małe efektywne, nie dawało też żadnych satysfakcjonujących wyników.
+Wykorzystywaliśmy wiele metod do klasteryzacji, jednak większość z nich okazała się być nieadekwatna do naszych danych. Głównym problemem okazało się bardzo mocne zróżnicowanie danych, niektóre metody też mają narzuconą od góry ilość klusterów które generują. Ustalenie tej liczby okazało się mało efektywne i nie dawało satysfakcjonujących wyników.
 
 ![alt text](plots/clustering_4_clusters_170tokens.png)\
 *Klastery stworzone za pomocą algorytmu KMeans. Wykres ten przedstawia spłaszczenia naszych wektorów i centroidów do 2 wymiarów za pomocą PCA. Klastery były oceniane na podstawie ich zawartości, nie tego wykresu.*
 
-Późniejsze próby klusteryzacji były wykonywane za pomocą algorytmów generujących dynamiczną liczbę klasterów. Udało nam się wykazać, że niektóre sekwencje się powtarzają bardzo często proporcjonalnie do całego zestawu danych, np. istnieje 44 sekwencji, w których przynajmniej połowa symboli pokrywa się z poniższą sekwencją:<center><b>['B.24.11', 'B.31.28', 'A.6', 'B.24.28.7', 'A.38', 'B.29.30.10', 'E.31.20', 'B.27.30']</center></b>
+Późniejsze próby klasteryzacji były wykonywane za pomocą algorytmów generujących dynamiczną liczbę klasterów. Udało nam się wykazać, że niektóre sekwencje się powtarzają bardzo często proporcjonalnie do całego zestawu danych, np. istnieje 44 sekwencji, w których przynajmniej połowa symboli pokrywa się z poniższą sekwencją:<center><b>['B.24.11', 'B.31.28', 'A.6', 'B.24.28.7', 'A.38', 'B.29.30.10', 'E.31.20', 'B.27.30']</center></b>
 
 Sugeruje to, że część naczyń była bardzo do siebie podobna, lecz było także wiele unikatowych egzemplarzy (o czym świadczy ilość klusterów nie mniejsza od 40 w przestrzeni 256 sekwencji).
 
@@ -25,7 +24,7 @@ Jedną z najważniejszych rzeczy, które udało nam się za jej pomocą udowodni
 ![alt text](plots/scene_symbol_count.png)\
 *Tylko 8 unikatowych symboli występuje na naczyniach ze scenami które występują 10 lub mniej razy.*
 
-Poza tym, udało nam się także znaleźć dwa symbole które nie występują ze sobą na tych samych naczyniach "B.29.23.B.25" oraz "E.17.25."
+Poza tym, udało nam się także znaleźć dwa symbole które nie występują ze sobą na tych samych naczyniach - "B.29.23.B.25" oraz "E.17.25."
 
 ### 3. Statystyka
 Które elementy występują najczęściej, które najrzadziej, czy ich częstość występowania jest wyrównana - takie fakty pragnęliśmy badać za pomocą tych metod. Już na samym początku zauważyliśmy, że większość symboli występuje tylko parokrotnie, a inne potrafią pojawiać się po kilkadziesiąt razy (np. B.24.11, B.27.30, A.6).
